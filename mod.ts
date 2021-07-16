@@ -29,8 +29,16 @@ const loadPlanets = async () => {
       stellarRadius < 1.01;
   });
 
-  return planets;
+  return planets.map((planet) => ({
+    name: planet.kepler_name,
+    numberOfPlanets: planet.koi_count,
+    temperature: planet.koi_steff,
+    planetaryRadius: planet.koi_prad,
+    stellarMass: planet.koi_smass,
+    stellarRadius: planet.koi_srad,
+  }));
 };
 
 const newEarths = await loadPlanets();
+newEarths.forEach((planet) => console.log(planet));
 console.log(`${newEarths.length} habitable planets found!`);
